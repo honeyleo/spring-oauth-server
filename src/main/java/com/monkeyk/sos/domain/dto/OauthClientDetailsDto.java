@@ -1,6 +1,7 @@
 package com.monkeyk.sos.domain.dto;
 
 import com.monkeyk.sos.domain.oauth.OauthClientDetails;
+import com.monkeyk.sos.domain.shared.GuidGenerator;
 import com.monkeyk.sos.infrastructure.DateUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -14,13 +15,14 @@ import java.util.List;
 public class OauthClientDetailsDto implements Serializable {
 
 
+    private static final long serialVersionUID = -690401014127462329L;
     private String createTime;
     private boolean archived;
 
-    private String clientId;
+    private String clientId = GuidGenerator.generate();
     private String resourceIds;
 
-    private String clientSecret;
+    private String clientSecret = GuidGenerator.generateClientSecret();
 
     private String scope;
 

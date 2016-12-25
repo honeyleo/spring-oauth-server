@@ -1,7 +1,8 @@
 package com.monkeyk.sos.infrastructure;
 
 import com.monkeyk.sos.ContextTest;
-import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  * @author Shengzhao Li
@@ -9,16 +10,13 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 public abstract class AbstractRepositoryTest extends ContextTest {
 
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
-    private MongoTemplate mongoTemplate;
 
-
-    //get MongoTemplate
-    protected MongoTemplate mongoTemplate() {
-        if (mongoTemplate == null) {
-            mongoTemplate = applicationContext.getBean(MongoTemplate.class);
-        }
-        return mongoTemplate;
+    public JdbcTemplate jdbcTemplate() {
+        return jdbcTemplate;
     }
+
 
 }

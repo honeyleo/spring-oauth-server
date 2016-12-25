@@ -16,9 +16,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <link rel="shortcut icon" href="${contextPath}/resources/favicon.ico"/>
 
-    <title><decorator:title default=""/> - SOS [MongoDB]</title>
+    <title><decorator:title default=""/> - Spring Security&OAuth2</title>
 
     <link href="${contextPath}/resources/bootstrap.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", Arial;
+        }
+    </style>
+
     <decorator:head/>
 
 </head>

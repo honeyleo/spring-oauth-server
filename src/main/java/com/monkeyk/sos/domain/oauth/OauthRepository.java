@@ -5,6 +5,8 @@ import com.monkeyk.sos.domain.shared.Repository;
 import java.util.List;
 
 /**
+ * 处理 OAuth 相关业务的 Repository
+ *
  * @author Shengzhao Li
  */
 public interface OauthRepository extends Repository {
@@ -13,13 +15,7 @@ public interface OauthRepository extends Repository {
 
     List<OauthClientDetails> findAllOauthClientDetails();
 
-    boolean updateOauthClientDetailsArchive(String clientId, boolean archive);
+    void updateOauthClientDetailsArchive(String clientId, boolean archive);
 
     void saveOauthClientDetails(OauthClientDetails clientDetails);
-
-    boolean removeOauthClientDetails(OauthClientDetails clientDetails);
-
-    void saveAuthorizationCode(AuthorizationCode authorizationCode);
-
-    AuthorizationCode removeAuthorizationCode(String code);
 }

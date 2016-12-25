@@ -5,12 +5,18 @@ import org.apache.commons.lang.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * Web 层工具类
+ *
  * @author Shengzhao Li
  */
 public abstract class WebUtils {
 
 
     private static ThreadLocal<String> ipThreadLocal = new ThreadLocal<>();
+
+    //private
+    private WebUtils() {
+    }
 
 
     public static void setIp(String ip) {
@@ -19,10 +25,6 @@ public abstract class WebUtils {
 
     public static String getIp() {
         return ipThreadLocal.get();
-    }
-
-    //private
-    private WebUtils() {
     }
 
 

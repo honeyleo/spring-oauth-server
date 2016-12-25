@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * 2016/3/25
@@ -38,7 +38,7 @@ public class UserFormDtoValidator implements Validator {
     }
 
     private void validatePrivileges(Errors errors, UserFormDto formDto) {
-        final Set<Privilege> privileges = formDto.getPrivileges();
+        final List<Privilege> privileges = formDto.getPrivileges();
         if (privileges == null || privileges.isEmpty()) {
             errors.rejectValue("privileges", null, "Privileges is required");
         }

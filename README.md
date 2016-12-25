@@ -1,10 +1,9 @@
 #spring-oauth-server
-MongoDB版本
 
 
-<strong>Spring与Oauth2的整合示例</strong>
+<strong>Spring与OAuth2的整合</strong>
 
-项目用Maven管理
+项目用Maven管理, 字符编码: UTF-8
 
 
 使用的技术与版本号
@@ -12,43 +11,48 @@ MongoDB版本
  <li>JDK (1.8.0_40)</li>
  <li>Servlet (3.1.0)</li>
  <li>Spring (4.1.6.RELEASE)</li>
- <li>Spring Security (4.0.1.RELEASE)</li>
+ <li>Spring Security (4.0.4.RELEASE)</li>
  <li>spring-security-oauth2 (2.0.7.RELEASE)</li>
  <li>Log4j (1.2.14)</li>
- <li>MongoDB (2.6.6)</li>
+ <li>MySQL (5.6.23)</li>
+ <li>EhCache (2.0.4)</li>
 </ol>
 <hr/>
 
-<strong>MySQL版本请访问Branch: <a href="http://git.oschina.net/shengzhao/spring-oauth-server/">master</a></strong>
-<br/>
 <strong>Java Config版本请访问Branch: <a href="http://git.oschina.net/shengzhao/spring-oauth-server/tree/config/">config</a></strong>
+
+<strong>MongoDB版本请访问Branch: <a href="http://git.oschina.net/shengzhao/spring-oauth-server/tree/mongodb/">mongodb</a></strong>
+
+<strong>OAuth2下一代身份认证授权协议OIDC实现: <a href="https://git.oschina.net/mkk/MyOIDC">MyOIDC</a></strong>
 <hr/>
 <h3>
-   Oauth客户端项目请访问 <a href="http://git.oschina.net/mkk/spring-oauth-client">spring-oauth-client</a>
+   OAuth2客户端项目请访问 <a href="http://git.oschina.net/mkk/spring-oauth-client">spring-oauth-client</a>
 </h3>
 <h3>
    在线测试访问地址 <a href="https://andaily.com/spring-oauth-server/">https://andaily.com/spring-oauth-server/</a>
 </h3>
 <h4>
-   Shiro与OLTU整合的Oauth2项目 <a href="http://git.oschina.net/mkk/oauth2-shiro">http://git.oschina.net/mkk/oauth2-shiro</a>
+   Shiro与OLTU整合的OAuth2项目 <a href="http://git.oschina.net/mkk/oauth2-shiro">http://git.oschina.net/mkk/oauth2-shiro</a>
    (相比spring-oauth-server, 该项目入门门槛相对较低, 代码更加透明, 理解更容易,可扩展性更强, 且模块化开发)
 </h4>
 <hr/>
 
 <p>
-<strong>如何使用MongoDB版本?</strong>
+<strong>如何使用?</strong>
 <ol>
 <li>
-项目是Maven管理的, 需要本地安装maven(开发用的maven版本号为3.1.0), 还有MongoDB(开发用的MongoDB版本号为2.6.6)
+项目是Maven管理的, 需要本地安装maven(开发用的maven版本号为3.1.0), 还有MySql(开发用的mysql版本号为5.6)
 </li>
 <li>
 <a href="http://git.oschina.net/shengzhao/spring-oauth-server/repository/archive?ref=master">下载</a>(或clone)项目到本地
 </li>
 <li>
-    MongoDB中创建数据库<code>spring-oauth-server</code>,并添加账号
+创建MySQL数据库(如数据库名oauth2), 并运行相应的SQL脚本(脚本文件位于others/database目录),
+<br/>
+   运行脚本的顺序: initial_db.ddl -> oauth.ddl -> initial_data.ddl
 </li>
 <li>
-修改<a href="http://git.oschina.net/shengzhao/spring-oauth-server/blob/master/src/main/resources/spring-oauth-server.properties">spring-oauth-server.properties</a>(位于src/main/resources目录)中的MongoDB连接信息(包括username, password等)
+修改<a href="http://git.oschina.net/shengzhao/spring-oauth-server/blob/master/src/main/resources/spring-oauth-server.properties">spring-oauth-server.properties</a>(位于src/main/resources目录)中的数据库连接信息(包括username, password等)
 </li>
 <li>
 将本地项目导入到IDE(如Intellij IDEA)中,配置Tomcat(或类似的servlet运行服务器), 并启动Tomcat(默认端口为8080);
@@ -67,8 +71,8 @@ MongoDB版本
 
 <hr/>
 <strong>grant_type</strong>
-<br/>
-说明Oauth支持的grant_type(授权方式)与功能
+
+说明OAuth2支持的grant_type(授权方式)与功能
 <ol>
     <li><code>authorization_code</code> -- 授权码模式(即先登录获取code,再获取token)</li>
     <li><code>password</code> -- 密码模式(将用户名,密码传过去,直接获取token)</li>
@@ -111,10 +115,10 @@ MongoDB版本
 <strong>功能扩展</strong>
 <ol>
     <li>
-        <code>oauth_code存入数据库的配置</code>,  请下载文件 <a href="https://git.oschina.net/shengzhao/spring-oauth-server/attach_files/download?i=4858&u=http%3A%2F%2Ffiles.git.oschina.net%2Fgroup1%2FM00%2F00%2F31%2FcHwGbFQXzC-AeseiAAfnNw23X70580.jpg%3Ftoken%3De81934223d99a0fddc02639017b568a6%26ts%3D1421151523%26filename%3Doauth_code%E5%AD%98%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E9%85%8D%E7%BD%AE.jpg">oauth_code存入数据库的配置.jpg</a>
+        <code>oauth_code存入数据库的配置</code>,  请下载文件 <a href="http://git.oschina.net/shengzhao/spring-oauth-server/attach_files">oauth_code存入数据库的配置.jpg</a>
     </li>
     <li>
-        <code>改变token过期的时间的配置</code>, 请下载文件<a href="https://git.oschina.net/shengzhao/spring-oauth-server/attach_files/download?i=6589&u=http%3A%2F%2Ffiles.git.oschina.net%2Fgroup1%2FM00%2F00%2F43%2FcHwGbFRpuk6ANN2CAANJ-Rkiz_c649.jpg%3Ftoken%3D686e6d5b1e9ab04446dbfeb977c3b7a1%26ts%3D1421151523%26filename%3D%E6%94%B9%E5%8F%98token%E8%BF%87%E6%9C%9F%E7%9A%84%E6%97%B6%E9%97%B4%E7%9A%84%E9%85%8D%E7%BD%AE.jpg">改变token过期的时间的配置.jpg</a>
+        <code>改变token过期的时间的配置</code>, 请下载文件<a href="http://git.oschina.net/shengzhao/spring-oauth-server/attach_files">改变token过期的时间的配置.jpg</a>
     </li>
     <li>
         <code>自定义 grant_type</code>, 默认情况支持的grant_type包括 [password,authorization_code,refresh_token,implicit], 若不需要其中的某些grant_type,
@@ -153,15 +157,40 @@ MongoDB版本
 <ul>
        <li>
             <p>
-                Version: <strong>0.5</strong> [planning]
+                Version: <strong>1.0</strong> [planning]
                 <br/>
-                Date: 2016-02-19 / ------
+                Date: --- / ---
             </p>
             <ol>
-                <li><p>(118) - Add java-config(零配置) 的支持, 以及启用 新的注解</p></li>
+                <li><p>------</p></li>
+            </ol>
+            <br/>
+       </li>
+       <li>
+            <p>
+                Version: <strong>0.6</strong> [finished]
+                <br/>
+                Date: 2016-07-07 / 2016-10-13
+            </p>
+            <ol>
+                <li><p><del>(150) - 修改OAUTH错误时返回JSON数据</del></p></li>
+                <li><p><del>(151) - 数据添加Ehcache缓存支持</del></p></li>
+                <li><p><del>(158) - 对配置,代码必要的地方添加注释,方便理解</del></p></li>
+                <li><p><del>添加OIDC协议文档</del></p></li>
+            </ol>
+            <br/>
+       </li>
+       <li>
+            <p>
+                Version: <strong>0.5</strong> [finished]
+                <br/>
+                Date: 2016-02-19 / 2016-06-02
+            </p>
+            <ol>
+                <li><p><del>(118) - Add java-config(零配置) 的支持, 以及启用 新的注解</del></p></li>
                 <li><p><del>(138) - OAuth 'token' Restful API</del></p></li>
                 <li><p><del>(139) - User Overview/ user add/archive</del></p></li>
-                <li><p>(143) - Add project API document</p></li>
+                <li><p><del>(143) - Add project API document</del></p></li>
                 <li><p><del>(144) - Add MongoDB branch</del></p></li>
             </ol>
             <br/>
@@ -247,13 +276,16 @@ MongoDB版本
         <li><p><em>2016-02-19</em>        Add 0.5 version development planning</p></li>
         <li><p><em>2016-04-03</em>        Add <a href="http://git.oschina.net/shengzhao/spring-oauth-server/tree/config/">config</a> branch</p></li>
         <li><p><em>2016-04-14</em>        Add <a href="http://git.oschina.net/shengzhao/spring-oauth-server/tree/mongodb/">mongodb</a> branch</p></li>
+        <li><p><em>2016-06-02</em>        发布 <a href="http://git.oschina.net/shengzhao/spring-oauth-server/tree/0.5/">0.5</a> 版本</p></li>
+        <li><p><em>2016-07-06</em>        Add 0.6 version planning</p></li>
+        <li><p><em>2016-10-13</em>        发布0.6版本</p></li>
     </ol>
 </p>
 
 
 <hr/>
 <strong>更多资源</strong>
-<p>以下是在学习工作中收集的更多关于Oauth的资源,对深入理解与运用Oauth有帮助</p>
+<p>以下是在学习工作中收集的更多关于OAuth2的资源,对深入理解与运用OAuth2有帮助</p>
 <ul>
        <li>
             <p>
@@ -292,7 +324,17 @@ MongoDB版本
        </li>
        <li>
             <p>
-                <a href="http://oltu.apache.org/">Apache Oltu</a>, Java版的 Oauth参考实现, 建议去了解了解
+                <a href="http://oltu.apache.org/">Apache Oltu</a>, Java版的 OAuth参考实现, 建议去了解了解
+            </p>
+       </li>
+       <li>
+            <p>
+                <a href="http://andaily.com/blog/?p=440">OIDC–基于OAuth2的下一代身份认证授权协议</a>
+            </p>
+       </li>
+       <li>
+            <p>
+                <a href="https://andaily.com/blog/?p=528">正确处理spring-oauth-server中在验证失败或错误时的方式</a>
             </p>
        </li>
 </ul>
@@ -300,12 +342,12 @@ MongoDB版本
 
 <hr/>
 <h4>
-    与项目相关的技术文章请访问 <a href="http://andaily.com/blog/?cat=19">http://andaily.com/blog/?cat=19</a> (不断更新与Oauth相关的文章)
+    与项目相关的技术文章请访问 <a href="http://andaily.com/blog/?cat=19">http://andaily.com/blog/?cat=19</a> (不断更新与OAuth2相关的文章)
 </h4>
 <p>
     <strong>问答与讨论</strong>
     <br/>
-    与项目相关的，与Oauth相关的问题与回答，以及各类讨论请访问<br/>
+    与项目相关的，与OAuth2相关的问题与回答，以及各类讨论请访问<br/>
     <a href="http://andaily.com/blog/?dwqa-question_category=oauth">http://andaily.com/blog/?dwqa-question_category=oauth</a>
 </p>
 
@@ -320,29 +362,36 @@ MongoDB版本
     <li><p>Honyee Management System (企业管理系统)</p></li>
     <li><p>AoLin Open Platform (国际物流开发平台)</p></li>
     <li><p>IDS (移动安全产品)</p></li>
+    <li><p>IDP (统一身份认证平台)</p></li>
     <li><p>......</p></li>
 </ul>
 
 
 <hr/>
-<p>
-    <strong>捐助</strong>
-    <br/>
+<div>
+    <h3>捐助</h3>
     支付宝: monkeyking1987@126.com (**钊)
-    <br/>
-    快意江湖 -- 100元
-    <br/>
-    yufan -- 100元
-</p>
+    <ul>
+        <li><p>快意江湖 -- 100元</p></li>
+        <li><p>yufan -- 100元</p></li>
+        <li><p>强郑 -- 1元 (2016-09-07)</p></li>
+        <li><p>建化 -- 5元 (2016-12-16)</p></li>
+        <li><p>南京索特科技 -- 200元 (2016-12-16)</p></li>
+    </ul>
+</div>
 
 <hr/>
 <p>
- 关注更多我的开源项目请访问 <a href="http://andaily.com/my_projects.html">http://andaily.com/my_projects.html</a>
+ 关注更多我的开源项目请访问 <a href="https://andaily.com/my_projects.html">https://andaily.com/my_projects.html</a>
 </p>
+
 <p>
  若需更多的技术支持请联系 <a href="mailto:monkeyk@shengzhaoli.com">monkeyk@shengzhaoli.com</a>
 </p>
 <p>
  <em>若需商业技术支持或提供技术解决方案, 请联系 <a href="mailto:sz@monkeyk.com">sz@monkeyk.com</a></em>
- 或访问 <a href="http://monkeyk.com/kso/" target="_blank">http://monkeyk.com/kso/</a>
+ 或访问 <a href="https://monkeyk.com/kso/" target="_blank">https://monkeyk.com/kso/</a>
+</p>
+<p>
+    <img src="http://77g1is.com1.z0.glb.clouddn.com/wechat_qrcode.jpg"/>
 </p>

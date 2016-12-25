@@ -38,9 +38,9 @@
                                 redirect_uri: <input type="text" value="" ng-model="redirectUri" size="70"
                                                      required="required"/>
                                 <br/>
-                                <a href="${contextPath}/oauth/authorize?client_id={{clientId}}&redirect_uri={{redirectUri}}&response_type=code&scope={{scope}}"
+                                <a href="${contextPath}/oauth/authorize?client_id={{clientId}}&redirect_uri={{redirectUri}}&response_type=code&scope={{scope}}&state=your_state"
                                    target="_blank">
-                                    /oauth/authorize?client_id={{clientId}}&redirect_uri={{redirectUri}}&response_type=code&scope={{scope}}</a>
+                                    /oauth/authorize?client_id={{clientId}}&redirect_uri={{redirectUri}}&response_type=code&scope={{scope}}&state=your_state</a>
                                 <span class="label label-info">GET</span>
                             </p>
                         </li>

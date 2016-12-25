@@ -13,6 +13,8 @@ import java.io.IOException;
 
 /**
  * 2016/1/30
+ * <p/>
+ * 设置字符编码并记录IP地址
  *
  * @author Shengzhao Li
  */

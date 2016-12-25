@@ -2,9 +2,10 @@ package com.monkeyk.sos.infrastructure;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
+ * 日期处理工具类
+ *
  * @author Shengzhao Li
  */
 public abstract class DateUtils {
@@ -23,11 +24,11 @@ public abstract class DateUtils {
     }
 
 
-    public static String toDateTime(Date date) {
+    public static String toDateTime(Timestamp date) {
         return toDateTime(date, DEFAULT_DATE_TIME_FORMAT);
     }
 
-    public static String toDateTime(Date dateTime, String pattern) {
+    public static String toDateTime(Timestamp dateTime, String pattern) {
     	pattern = pattern == null ? "yyyy-MM-dd HH:mm:ss" : pattern;
     	SimpleDateFormat format = new SimpleDateFormat(pattern);
 		String datastring = format.format(dateTime);
@@ -36,7 +37,7 @@ public abstract class DateUtils {
 
 
 
-    public static String toDateText(Date date, String pattern) {
+    public static String toDateText(Timestamp date, String pattern) {
         if (date == null || pattern == null) {
             return null;
         }

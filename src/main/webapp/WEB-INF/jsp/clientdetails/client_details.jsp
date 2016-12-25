@@ -9,7 +9,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>ClientDetails</title>
+    <title>client_details</title>
 
     <style>
         .list-group li:hover {
@@ -22,7 +22,7 @@
 
 <div class="row">
     <div class="col-md-10">
-        <h3>ClientDetails</h3>
+        <h3>client_details</h3>
     </div>
     <div class="col-md-2">
         <div class="pull-right">
@@ -35,11 +35,6 @@
 
 <div>
     <ul class="list-group">
-        <c:if test="${empty clientDetailsDtoList}">
-            <li class="list-group-item">
-                <p>Not yet added ClientDetails</p>
-            </li>
-        </c:if>
         <c:forEach items="${clientDetailsDtoList}" var="cli">
             <li class="list-group-item">
                 <div class="pull-right">
@@ -79,7 +74,11 @@
 
     </ul>
     <p class="help-block">
-        每一个item对应<code>ClientDetails</code>中的一条数据; 共<strong>${fun:length(clientDetailsDtoList)}</strong>条数据.
+        每一个item对应<code>oauth_client_details</code>表中的一条数据; 共<strong>${fun:length(clientDetailsDtoList)}</strong>条数据.
+        <br/>
+        对spring-oauth-server数据库表的详细说明请访问
+        <a href="http://andaily.com/spring-oauth-server/db_table_description.html" target="_blank">http://andaily.com/spring-oauth-server/db_table_description.html</a>
+        (或访问项目others目录的db_table_description.html文件)
     </p>
 </div>
 </body>

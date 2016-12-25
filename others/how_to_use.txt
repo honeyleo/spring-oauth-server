@@ -22,4 +22,8 @@
 
 6.参考oauth_test.txt(位于others目录)的内容并测试之(也可在浏览器中访问相应的地址,如: http://localhost:8080/spring-oauth-server).
 
+备注：client需要调用资源服务器上的接口，那么该client的属性resource_ids必须包含该资源，同时授权的用户也要有该资源的接口的权限
+示例：用户admin登录成功后，授权client_id=unity-client的客户端，client_id=unity-client的客户端拿该access_token去访问URL为“/m/*”
+的接口时，会提示错误：Invalid token does not contain resource id (mobile-resource)，但是他可以去访问URL为“/unity/*”的接口，
+因为unity-client客户端拥有资源unity-resource
 

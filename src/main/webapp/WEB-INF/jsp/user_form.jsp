@@ -35,7 +35,7 @@
             <form:password path="password" cssClass="form-control" placeholder="Type password"
                            required="required"/>
 
-            <p class="help-block">Password, unique.</p>
+            <p class="help-block">Password, required.</p>
         </div>
     </div>
     <div class="form-group">

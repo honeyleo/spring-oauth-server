@@ -1,54 +1,34 @@
 package com.monkeyk.sos.domain.user;
 
-
-import com.monkeyk.sos.domain.shared.GuidGenerator;
-import com.monkeyk.sos.infrastructure.DateUtils;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Version;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+
+import com.monkeyk.sos.domain.AbstractDomain;
 
 /**
+ * 定义用户
+ *
  * @author Shengzhao Li
  */
-@Document(collection = "user_")
-public class User implements Serializable {
+public class User extends AbstractDomain {
 
 
-    private static final long serialVersionUID = -6117108610171201352L;
+    private static final long serialVersionUID = -2921689304753120556L;
 
 
-    @Id
-    private String guid = GuidGenerator.generate();
-
-    @CreatedDate
-    private Date createTime = DateUtils.now();
-
-    @Version
-    private Long version;
-
-    //unique
     private String username;
-
     private String password;
 
     private String phone;
     private String email;
-    //Default user is initialed
+    //Default user is initial when create database, do not delete
     private boolean defaultUser = false;
 
     private Date lastLoginTime;
 
-    private Set<Privilege> privileges = new HashSet<>();
-
-
-    private boolean archived = false;
-
+    private List<Privilege> privileges = new ArrayList<>();
 
     public User() {
     }
@@ -58,15 +38,6 @@ public class User implements Serializable {
         this.password = password;
         this.phone = phone;
         this.email = email;
-    }
-
-
-    public Long version() {
-        return version;
-    }
-
-    public String guid() {
-        return guid;
     }
 
     public boolean defaultUser() {
@@ -81,11 +52,6 @@ public class User implements Serializable {
         return password;
     }
 
-    public User password(String password) {
-        this.password = password;
-        return this;
-    }
-
     public String phone() {
         return phone;
     }
@@ -94,27 +60,21 @@ public class User implements Serializable {
         return email;
     }
 
-    public Set<Privilege> privileges() {
+    public List<Privilege> privileges() {
         return privileges;
-    }
-
-    public Date createTime() {
-        return createTime;
-    }
-
-
-    public boolean archived() {
-        return archived;
-    }
-
-    public User archived(boolean archived) {
-        this.archived = archived;
-        return this;
     }
 
     @Override
     public String toString() {
-        return "{username='" + username + '\'' + ", phone='" + phone + '\'' + ", version='" + version + '\'' + ", defaultUser='" + defaultUser + '\'' + ", email='" + email + '\'' + '}';
+        final StringBuilder sb = new StringBuilder();
+        sb.append("{username='").append(username).append('\'');
+        sb.append(", phone='").append(phone).append('\'');
+        sb.append(", id='").append(id).append('\'');
+        sb.append(", guid='").append(guid).append('\'');
+        sb.append(", defaultUser='").append(defaultUser).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 
     public User email(String email) {
@@ -138,7 +98,21 @@ public class User implements Serializable {
         return lastLoginTime;
     }
 
-    public void lastLoginTime(Date lastLoginTime) {
+    public User lastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
+        return this;
+    }
+
+    public User createTime(Timestamp createTime) {
+        this.createTime = createTime;
+        return this;
+    }
+
+    public User password(String password) {
+        this.password = password;
+        return this;
+    }
+    public void defaultUser(boolean defaultUser) {
+    	this.defaultUser = defaultUser;
     }
 }

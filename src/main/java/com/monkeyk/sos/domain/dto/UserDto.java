@@ -13,9 +13,7 @@ package com.monkeyk.sos.domain.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.monkeyk.sos.domain.user.Privilege;
 import com.monkeyk.sos.domain.user.User;
@@ -39,7 +37,7 @@ public class UserDto implements Serializable {
 
     private String createTime;
 
-    private Set<Privilege> privileges = new HashSet<>();
+    private List<Privilege> privileges = new ArrayList<>();
 
 
     public UserDto() {
@@ -96,18 +94,18 @@ public class UserDto implements Serializable {
         this.email = email;
     }
 
-    public Set<Privilege> getPrivileges() {
+    public List<Privilege> getPrivileges() {
         return privileges;
     }
 
-    public void setPrivileges(Set<Privilege> privileges) {
+    public void setPrivileges(List<Privilege> privileges) {
         this.privileges = privileges;
     }
 
     public static List<UserDto> toDtos(List<User> users) {
         List<UserDto> dtos = new ArrayList<>(users.size());
-        for(User user : users) {
-        	dtos.add(new UserDto(user));
+        for (User user : users) {
+            dtos.add(new UserDto(user));
         }
         return dtos;
     }

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
+ * OAuth 业务处理服务对象, 事务拦截也加在这一层
+ *
  * @author Shengzhao Li
  */
 @Service("oauthService")

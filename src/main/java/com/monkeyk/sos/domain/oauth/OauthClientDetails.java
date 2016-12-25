@@ -1,38 +1,24 @@
 package com.monkeyk.sos.domain.oauth;
 
-import com.monkeyk.sos.infrastructure.DateUtils;
-import org.apache.commons.lang.StringUtils;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Version;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.security.oauth2.provider.ClientDetails;
-import org.springframework.security.oauth2.provider.client.BaseClientDetails;
-
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
+
+import com.monkeyk.sos.infrastructure.DateUtils;
 
 /**
+ * 定义OAuth中的 Client, 也称 ClientDetails
+ *
  * @author Shengzhao Li
  */
-@Document(collection = "OauthClientDetails")
 public class OauthClientDetails implements Serializable {
 
-    private static final long serialVersionUID = 3186665658971862447L;
 
+    private static final long serialVersionUID = -6947822646185526939L;
 
-    @Id
-    private String clientId;
-
-    @CreatedDate
-    private Date createTime = DateUtils.now();
-
-    @Version
-    private Long version;
-
+    private Timestamp createTime = DateUtils.now();
     private boolean archived = false;
 
-
+    private String clientId;
     private String resourceIds;
 
     private String clientSecret;
@@ -64,14 +50,12 @@ public class OauthClientDetails implements Serializable {
     /**
      * The access token validity period in seconds (optional).
      * If unspecified a global default will be applied by the token services.
-     * Unit: second
      */
     private Integer accessTokenValidity;
 
     /**
      * The refresh token validity period in seconds (optional).
      * If unspecified a global default will  be applied by the token services.
-     * Unit: second
      */
     private Integer refreshTokenValidity;
 
@@ -84,42 +68,38 @@ public class OauthClientDetails implements Serializable {
      */
     private boolean trusted = false;
 
+    /**
+     * Value is 'true' or 'false',  default 'false'
+     */
+    private String autoApprove;
+
     public OauthClientDetails() {
     }
 
-
-    public ClientDetails toClientDetails() {
-        BaseClientDetails clientDetails = new BaseClientDetails(clientId, resourceIds, scope, authorizedGrantTypes, authorities, webServerRedirectUri);
-        clientDetails.setClientSecret(clientSecret);
-
-        if (StringUtils.isNotEmpty(additionalInformation)) {
-            clientDetails.addAdditionalInformation("information", additionalInformation);
-        }
-        clientDetails.setAccessTokenValiditySeconds(accessTokenValidity);
-        clientDetails.setRefreshTokenValiditySeconds(refreshTokenValidity);
-
-        return clientDetails;
+    public String autoApprove() {
+        return autoApprove;
     }
 
-    public Long version() {
-        return version;
+    public OauthClientDetails autoApprove(String autoApprove) {
+        this.autoApprove = autoApprove;
+        return this;
     }
 
     public boolean trusted() {
         return trusted;
     }
 
-    public Date createTime() {
+    public Timestamp createTime() {
         return createTime;
+    }
+
+    public OauthClientDetails createTime(Timestamp createTime) {
+        this.createTime = createTime;
+        return this;
     }
 
     public boolean archived() {
         return archived;
-    }
-
-    public OauthClientDetails archived(boolean archived) {
-        this.archived = archived;
-        return this;
     }
 
     public String clientId() {
@@ -179,7 +159,6 @@ public class OauthClientDetails implements Serializable {
         sb.append(", accessTokenValidity=").append(accessTokenValidity);
         sb.append(", refreshTokenValidity=").append(refreshTokenValidity);
         sb.append(", additionalInformation='").append(additionalInformation).append('\'');
-        sb.append(", version='").append(version).append('\'');
         sb.append(", trusted=").append(trusted);
         sb.append('}');
         return sb.toString();
@@ -237,6 +216,11 @@ public class OauthClientDetails implements Serializable {
 
     public OauthClientDetails additionalInformation(String additionalInformation) {
         this.additionalInformation = additionalInformation;
+        return this;
+    }
+
+    public OauthClientDetails archived(boolean archived) {
+        this.archived = archived;
         return this;
     }
 }

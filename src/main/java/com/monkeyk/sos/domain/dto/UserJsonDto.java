@@ -1,12 +1,11 @@
 package com.monkeyk.sos.domain.dto;
 
+import com.monkeyk.sos.domain.user.Privilege;
+import com.monkeyk.sos.domain.user.User;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
-import com.monkeyk.sos.domain.user.Privilege;
-import com.monkeyk.sos.domain.user.User;
 
 /**
  * @author Shengzhao Li
@@ -14,7 +13,6 @@ import com.monkeyk.sos.domain.user.User;
 public class UserJsonDto implements Serializable {
 
 
-    private static final long serialVersionUID = 3323307820018705154L;
     private String guid;
     private boolean archived;
 
@@ -35,7 +33,7 @@ public class UserJsonDto implements Serializable {
         this.phone = user.phone();
         this.email = user.email();
 
-        final Set<Privilege> privilegeList = user.privileges();
+        final List<Privilege> privilegeList = user.privileges();
         for (Privilege privilege : privilegeList) {
             this.privileges.add(privilege.name());
         }

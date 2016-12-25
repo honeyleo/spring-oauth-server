@@ -4,6 +4,8 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 
 /**
  * 2016/3/25
+ * <p/>
+ * 处理账号密码, 使用MD5加密
  *
  * @author Shengzhao Li
  */

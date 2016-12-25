@@ -1,18 +1,18 @@
 package com.monkeyk.sos.domain.shared.security;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-
+import com.monkeyk.sos.domain.user.Privilege;
+import com.monkeyk.sos.domain.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.monkeyk.sos.domain.user.Privilege;
-import com.monkeyk.sos.domain.user.User;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
+ * Spring Security中的 UserDetails 实现
+ *
  * @author Shengzhao Li
  */
 public class WdcyUserDetails implements UserDetails {
@@ -42,7 +42,7 @@ public class WdcyUserDetails implements UserDetails {
             this.grantedAuthorities.add(new SimpleGrantedAuthority(ROLE_PREFIX + Privilege.UNITY.name()));
             this.grantedAuthorities.add(new SimpleGrantedAuthority(ROLE_PREFIX + Privilege.MOBILE.name()));
         } else {
-            final Set<Privilege> privileges = user.privileges();
+            final List<Privilege> privileges = user.privileges();
             for (Privilege privilege : privileges) {
                 this.grantedAuthorities.add(new SimpleGrantedAuthority(ROLE_PREFIX + privilege.name()));
             }
@@ -96,6 +96,9 @@ public class WdcyUserDetails implements UserDetails {
 
     @Override
     public String toString() {
-        return "{user=" + user + '}';
+        final StringBuilder sb = new StringBuilder();
+        sb.append("{user=").append(user);
+        sb.append('}');
+        return sb.toString();
     }
 }
