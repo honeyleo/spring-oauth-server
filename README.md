@@ -1,3 +1,4 @@
+http://bukebuhao.iteye.com/blog/1330623
 #spring-oauth-server
 MongoDB版本
 
