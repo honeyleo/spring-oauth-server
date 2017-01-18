@@ -27,3 +27,5 @@
 的接口时，会提示错误：Invalid token does not contain resource id (mobile-resource)，但是他可以去访问URL为“/unity/*”的接口，
 因为unity-client客户端拥有资源unity-resource
 
+oauth2.0中包含两种权限：用户权限，和客户端权限。
+grant_type=client_credentials这种授权模式，仅当client_details中的authorities包含访问的资源的权限时才能访问
